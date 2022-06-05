@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.mapper.DeliverMapper">
+
+
+    <select id="queryDeliverByStudentId" resultType="com.jin.entity.Deliver" parameterType="java.lang.Long">
+        SELECT *
+        FROM deliver
+        WHERE student_id = #{id}
+    </select>
+
+    <select id="queryDetailedInfo" resultType="com.jin.dto.DeliverDetailDto" parameterType="java.lang.Long">
+        SELECT e.employ_name,
+               st.student_id,
+               d.deliver_id,
+               st.student_name,
+               st.sex,
+               sc.school_name,
+               m.major_name,
+               st.credit,
+               st.resume
+        FROM student st,
+             teacher t,
+             classs c,
+             major m,
+             school sc,
+             deliver d,
+             employ e
+        WHERE st.class_id = c.class_id
+          AND c.teacher_id = t.teacher_id
+          AND t.school_id = sc.school_id
+          AND c.major_id = m.major_id
+          AND d.student_id = st.student_id
+          AND d.employ_id = e.employ_id
+          AND d.deliver_status = 0
+          AND e.company_id = #{id}
+    </select>
+</mapper>

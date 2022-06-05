@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.mapper.EmployMapper">
+
+
+    <select id="queryDetailedInfo" resultType="com.jin.dto.EmployDetailDto" parameterType="java.lang.String">
+        SELECT e.employ_id, e.employ_name, c.company_name, p.profession_name, e.wages
+        FROM employ e,
+        company c,
+        profession p
+        WHERE e.company_id = c.company_id
+        AND e.profession_id = p.profession_id
+        <if test="employName!=null">
+            AND e.employ_name LIKE concat('%',#{employName},'%')
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+jin:
+  jwt:
+    expire: 604800
+    secret: afkjd23krhdhfvhw4523u89089gsyrgh
