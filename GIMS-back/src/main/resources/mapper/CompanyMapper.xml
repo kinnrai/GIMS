@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.mapper.CompanyMapper">
+
+    <select id="getCompanyIdByAccountId" resultType="java.lang.Long">
+        SELECT company.company_id
+        FROM account,
+             recruiter,
+             company
+        WHERE recruiter.account_id = #{accountId}
+          AND account.account_id = recruiter.account_id
+          AND company.company_id = recruiter.company_id
+    </select>
+</mapper>

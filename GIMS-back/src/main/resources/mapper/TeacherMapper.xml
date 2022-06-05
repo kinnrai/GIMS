@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.mapper.TeacherMapper">
+
+    <select id="queryDetailedInfo" resultType="com.jin.dto.TeacherDetailDto" parameterType="java.lang.Long">
+        SELECT teacher.teacher_id, teacher.teacher_name, school.school_name
+        FROM teacher,
+             school
+        WHERE teacher.school_id = school.school_id
+          AND teacher.account_id = #{id}
+    </select>
+
+    <update id="modifyDetailedInfo" parameterType="com.jin.dto.TeacherDetailDto">
+        UPDATE teacher
+        SET teacher.teacher_name=#{teacherName}
+        WHERE teacher.teacher_id = #{teacherId}
+    </update>
+</mapper>
